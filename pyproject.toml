@@ -1,0 +1,32 @@
+[tool.black]
+line-length = 80
+target-version = ['py39']
+exclude = '/.*(__pycache__).*/'
+
+[tool.setuptools]
+py-modules = ["scar"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scar"
+version = "0.0.1"
+description = "A pure python type enforcer for python type annotations"
+authors = [
+    {name="Connor Makowski", email="conmak@mit.edu"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    'License :: OSI Approved :: MIT License',
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://github.com/connor-makowski/scar"
+"Bug Tracker" = "https://github.com/connor-makowski/scar/issues"
+"Documentation" = "https://connor-makowski.github.io/scar/scar/enforcer.html"
