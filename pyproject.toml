@@ -24,7 +24,7 @@ classifiers = [
     'License :: OSI Approved :: MIT License',
     "Operating System :: OS Independent",
 ]
-dependencies = ["scgraph==2.14.1"]
+dependencies = ["scgraph==2.14.1", "dill==0.4.0"]
 
 [project.urls]
 "Homepage" = "https://github.com/connor-makowski/scar"

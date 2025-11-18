@@ -20,6 +20,7 @@ class Queue:
         heappush(self.__queue__, (next_time, self.__event_id__))
 
     def process(self):
+
         self.__current_time__, event_id = heappop(self.__queue__)
         event_id, func, args, kwargs = self.__event_dict__.pop(event_id)
         func(*args, **kwargs)
@@ -34,6 +35,6 @@ class Queue:
             })
 
     def run(self, max_time:float):
-        while self.__queue__ and self.__current_time__ <= max_time:
+        while self.__queue__ and self.__queue__[0][0] <= max_time:
             self.process()
         

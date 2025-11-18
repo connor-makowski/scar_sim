@@ -3,6 +3,7 @@ from scar.queue import Queue
 from scar.entity import Node, Arc, SimulationObject
 from scar.order import Order
 from scar.graph import Graph
+import dill
 
 
 class Simulation:
@@ -48,3 +49,21 @@ class Simulation:
 
     def run(self, max_time: float):
         self.__queue__.run(max_time=max_time)
+
+    def export_state(self, filename:str|None=None) -> bytes | str:
+        if filename is not None:
+            with open(filename, 'wb') as f:
+                dill.dump(self, f)
+            return filename
+        else:
+            return dill.dumps(self)
+    
+    @staticmethod
+    def import_state(data: bytes|None=None, filename: str|None = None) -> 'Simulation':
+        if filename is not None:
+            with open(filename, 'rb') as f:
+                return dill.load(f)
+        elif data is not None:
+            return dill.loads(data)
+        else:
+            raise ValueError("Either data or filename must be provided to import a simulation")

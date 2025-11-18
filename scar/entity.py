@@ -1,7 +1,5 @@
 
 import random
-from scar.utils import hard_round
-
 random.seed(42)
 
 class SimulationObject:
@@ -15,38 +13,41 @@ class SimulationEntity(SimulationObject):
             processing_min_time: float = 0.0,
             processing_avg_time: float = 0.0,
             processing_sd_time: float = 0.0,
-            processing_cost_per_unit: float = 0.0,
+            processing_cashflow_per_unit: float = 0.0,
+            metadata: dict = dict()
         ):
         # Basic info
         super().__init__()
         self.entity_type = self.__class__.__name__
+        # Split the entity type on uppercase letters and join with underscores
+        self.cashflow_key = ''.join(['_' + letter.lower() if letter.isupper() else letter for letter in self.entity_type]).lstrip('_') + '_cashflow'
+        self.metadata = metadata
 
         # Processing defaults
         self.default_processing_min_time = processing_min_time
         self.default_processing_avg_time = processing_avg_time
         self.default_processing_sd_time = processing_sd_time
-        self.default_processing_cost_per_unit = processing_cost_per_unit
+        self.default_processing_cashflow_per_unit = processing_cashflow_per_unit
 
         # Live processing info
         self.processing_time_min = processing_min_time
         self.processing_time_avg = processing_avg_time
         self.processing_time_sd = processing_sd_time
-        self.processing_cost_per_unit = processing_cost_per_unit
+        self.processing_cashflow_per_unit = processing_cashflow_per_unit
+
+    def get_metadata(self, **kwargs) -> dict:
+        # Return a copy of the metadata dictionary (in case it is modified later)
+        return {**dict(self.metadata), **kwargs}
 
     def get_processing_time(self) -> float:
         return max(self.processing_time_min, random.gauss(self.processing_time_avg, self.processing_time_sd))
-
-    def get_costs(self, units:int) -> dict[str, float]:
-        return {
-            'processing': self.processing_cost_per_unit * units
-        }
     
     def change_processing_parameters(
             self,
             processing_min_time: float | None = None,
             processing_avg_time: float | None = None,
             processing_sd_time: float | None = None,
-            processing_cost_per_unit: float | None = None
+            processing_cashflow_per_unit: float | None = None
         ) -> None:
         if processing_min_time is not None:
             self.processing_time_min = processing_min_time
@@ -54,8 +55,8 @@ class SimulationEntity(SimulationObject):
             self.processing_time_avg = processing_avg_time
         if processing_sd_time is not None:
             self.processing_time_sd = processing_sd_time
-        if processing_cost_per_unit is not None:
-            self.processing_cost_per_unit = processing_cost_per_unit
+        if processing_cashflow_per_unit is not None:
+            self.processing_cashflow_per_unit = processing_cashflow_per_unit
         if self.__simulation__ is not None:
             self.__simulation__.graph.update_graphs(self)
 
@@ -64,9 +65,11 @@ class SimulationEntity(SimulationObject):
             processing_min_time=self.default_processing_min_time,
             processing_avg_time=self.default_processing_avg_time,
             processing_sd_time=self.default_processing_sd_time,
-            processing_cost_per_unit=self.default_processing_cost_per_unit
+            processing_cashflow_per_unit=self.default_processing_cashflow_per_unit
         )
-        
+
+    def get_cashflow(self, units:int) -> float:
+        return self.processing_cashflow_per_unit * units
 
 class Node(SimulationEntity):
     def __init__(self, *args, **kwargs):
@@ -78,12 +81,6 @@ class Arc(SimulationEntity):
         super().__init__(**kwargs)
         self.origin_node = origin_node
         self.destination_node = destination_node
-
-
-    def get_costs(self, units:int) -> dict[str, float]:
-        return { 
-            'transportation': self.processing_cost_per_unit * units
-        }
     
 class Facility(Node):
     """
@@ -102,14 +99,17 @@ class Facility(Node):
         # TODO: Update inventory levels
         pass
 
-class Supplier(Facility):
-    def get_costs(self, units:int) -> dict[str, float]:
-        return { 
-            'cogs': self.processing_cost_per_unit * units
-        }
+    def order_completed(self, order):
+        """
+        A placeholder method to handle logic when an order is completed at this facility.
+        This can be overridden in subclasses to implement specific behavior.
 
-class Warehouse(Facility):
-    pass
+        Requires:
 
-class FulfillmentCenter(Facility):
-    pass
+        - order (Order): The order that has been completed.
+
+        Returns:
+
+        - None
+        """
+        pass
