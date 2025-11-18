@@ -10,6 +10,8 @@ class Graph:
         self.time_graph = []
         self.cashflow_graph = []
         self.arc_obj_graph = []
+        self.node_objects = []
+        self.arc_objects = []
 
     def update_graphs(self, obj: Arc | Node):
         if isinstance(obj, Arc):
@@ -20,14 +22,14 @@ class Graph:
             self.time_graph[obj.id] = {obj.outbound_id: float(obj.processing_time_avg)}
             self.cashflow_graph[obj.id] = {obj.outbound_id: float(obj.processing_cashflow_per_unit)}
 
-    def add_object(self, obj: Node | Arc):
+    def add_object(self, obj: Node | Arc) -> Node | Arc:
         if isinstance(obj, Arc):
-            obj.id = get_arc_id()
-            if obj.origin_node.id is None or obj.destination_node.id is None:
-                raise ValueError("Both origin and destination nodes must be added to the graph before adding the arc")
+            obj.id = len(self.arc_objects)
+            self.arc_objects.append(obj)
         elif isinstance(obj, Node):
-            obj.id = len(self.time_graph)
+            obj.id = len(self.node_objects)
             obj.outbound_id = obj.id + 1
+            self.node_objects += [obj, obj]
             self.time_graph += [dict(), dict()]
             self.cashflow_graph += [dict(), dict()]
             self.arc_obj_graph += [dict(), dict()]

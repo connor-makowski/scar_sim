@@ -76,11 +76,17 @@ class Node(SimulationEntity):
         super().__init__(*args, **kwargs)
         self.outbound_id = None
 
+    def get_entity_type(self) -> str:
+        return 'node'
+
 class Arc(SimulationEntity):
     def __init__(self, origin_node: Node, destination_node: Node, **kwargs):
         super().__init__(**kwargs)
         self.origin_node = origin_node
         self.destination_node = destination_node
+
+    def get_entity_type(self) -> str:
+        return 'arc'
     
 class Facility(Node):
     """

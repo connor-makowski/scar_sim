@@ -9,8 +9,6 @@ import dill
 class Simulation:
     def __init__(self):
         # Simulation objects
-        self.nodes = {}
-        self.arcs = {}
         self.orders = []
 
         # Stateful queue and graphs
@@ -25,20 +23,14 @@ class Simulation:
 
     def add_object(self, obj: SimulationObject):
         if obj.id is not None:
-            raise ValueError("Object is already added to the simulation")
+            raise ValueError("Object is already added to a simulation")
         # Create a ref to this simulation in the object
         obj.__simulation__ = self
-        if isinstance(obj, Node):
+        if isinstance(obj, (Node, Arc)):
             # Adding an object to the graph sets its ID
-            # It is important to use the graph to create node IDs
-            # since nodes are actually two nodes in the graph (inbound and outbound)
+            # It is important to use the graph to create node and arc IDs
+            # Nodes are actually two nodes in the graph (inbound and outbound)
             self.graph.add_object(obj)
-            self.nodes[obj.id] = obj
-        elif isinstance(obj, Arc):
-            # Adding an object to the graph sets its ID
-            # It is important to use the graph to create arc IDs
-            self.graph.add_object(obj)
-            self.arcs[obj.id] = obj
         elif isinstance(obj, Order):
             obj.id = len(self.orders)
             # Update the orders list

@@ -14,7 +14,7 @@ class Customer(Facility):
 simulation = Simulation()
 
 # Create nodes
-supplier_0 = simulation.add_object(
+supplier_00 = simulation.add_object(
     Facility(
         processing_min_time=1,
         processing_avg_time=2,
@@ -22,24 +22,24 @@ supplier_0 = simulation.add_object(
         processing_cashflow_per_unit=-50,
         metadata={
             'loc': 'cn_ningbo',
-            'otype': 'node_supplier',
+            'oid': 'node_supplier_00',
         }
     )
 )
-factory_1 = simulation.add_object(
+factory_01 = simulation.add_object(
     Facility(
         processing_min_time=0.2,
         processing_avg_time=0.5,
         processing_sd_time=0.1,
         processing_cashflow_per_unit=-15,
         metadata={
-            'loc': 'us_ks_kc',
-            'otype': 'node_factory',
+            'loc': 'us_mo_kc',
+            'oid': 'node_factory_01',
         }
     )
 )
 
-warehouse_2 = simulation.add_object(
+warehouse_02 = simulation.add_object(
     Facility(
         processing_min_time=0.5,
         processing_avg_time=1,
@@ -47,12 +47,12 @@ warehouse_2 = simulation.add_object(
         processing_cashflow_per_unit=-20,
         metadata={
             'loc': 'us_ca_sf',
-            'otype': 'node_warehouse',
+            'oid': 'node_warehouse_02',
         }    
     )
 )
 
-customer_3 = simulation.add_object(
+customer_03 = simulation.add_object(
     Customer(
         processing_min_time=0.1,
         processing_avg_time=0.3,
@@ -60,55 +60,55 @@ customer_3 = simulation.add_object(
         processing_cashflow_per_unit=200,
         metadata={
             'loc': 'us_ca',
-            'otype': 'node_customer',
+            'oid': 'node_customer_03',
         }
     )
 )
 
 # Create arcs between nodes
-arc_0_1 = simulation.add_object(Arc(
-    origin_node=supplier_0, 
-    destination_node=factory_1, 
+arc_00_01 = simulation.add_object(Arc(
+    origin_node=supplier_00, 
+    destination_node=factory_01, 
     processing_min_time=0.1, 
     processing_avg_time=0.2, 
     processing_sd_time=0.05, 
     processing_cashflow_per_unit=-10,
     metadata={
         'loc': 'oc_pa',
-        'otype': 'arc_ocean',
+        'oid': 'arc_ocean_00_01',
     }
 ))
-arc_1_2 = simulation.add_object(Arc(
-    origin_node=factory_1, 
-    destination_node=warehouse_2, 
+arc_01_02 = simulation.add_object(Arc(
+    origin_node=factory_01, 
+    destination_node=warehouse_02, 
     processing_min_time=0.1, 
     processing_avg_time=0.3, 
     processing_sd_time=0.1, 
     processing_cashflow_per_unit=-12,
     metadata={
         'loc': 'us_mo_ks',
-        'otype': 'arc_road',
+        'oid': 'arc_road_01_02',
     }   
 ))
 
-arc_2_3 = simulation.add_object(Arc(
-    origin_node=warehouse_2,
-    destination_node=customer_3,
+arc_02_03 = simulation.add_object(Arc(
+    origin_node=warehouse_02,
+    destination_node=customer_03,
     processing_min_time=0.2,
     processing_avg_time=0.4,
     processing_sd_time=0.1,
     processing_cashflow_per_unit=-8,
     metadata={
         'loc': 'us_ca',
-        'otype': 'arc_lm',
+        'oid': 'arc_lm_02_03',
     }
 ))
 
 order = simulation.add_object(Order(
-    origin_node=supplier_0,
-    destination_node=customer_3,
+    origin_node=supplier_00,
+    destination_node=customer_03,
     units=1,
-    planned_path=simulation.graph.get_optimal_path(supplier_0, customer_3, 'cashflow')
+    planned_path=simulation.graph.get_optimal_path(supplier_00, customer_03, 'cashflow')
 ))
 
 simulation.add_event(
@@ -118,13 +118,13 @@ simulation.add_event(
 
 # simulation.add_event(
 #     time_delta=1.5,
-#     func=arc_1_2.change_processing_parameters,
+#     func=arc_01_02.change_processing_parameters,
 #     kwargs={'processing_avg_time': 5},
 # )
 
 # simulation.add_event(
 #     time_delta=10.0,
-#     func=arc_1_2.reset_processing_parameters,
+#     func=arc_01_02.reset_processing_parameters,
 # )
 
 

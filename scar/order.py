@@ -46,16 +46,20 @@ class Order(SimulationObject):
 
         By default, this returns the current simulation time in integer form as 'time'.
         """
-        return {'time': int(self.__simulation__.current_time())}
+        return {
+            'time': int(self.__simulation__.current_time()),
+        }
 
     def __next__(self, status: str) -> None:
         # Log this item into the Order history
         self.history.append({
             'time': self.__simulation__.current_time(),
+            'time_delta': round(self.__simulation__.current_time() - self.__prev_time__, 3),
+            'graph_type': self.__current_object__.get_entity_type(),
+            'graph_id': self.__current_object__.id,
             'meta': self.__current_object__.get_metadata(**self.inject_metadata()),
             'status': status,
             'cashflow': 0.0,
-            't_delta': round(self.__simulation__.current_time() - self.__prev_time__, 3),
         })
 
         self.__prev_time__ = self.__simulation__.current_time()
