@@ -14,20 +14,93 @@ pip install -e ./scar
 
 ## Basic Usage
 ```py
-import scar
+from scar.entity import Facility, Arc, Node
+from scar.order import Order
+from scar.simulation import Simulation
 
-# TODO: Do something here
+
+simulation = Simulation()
+
+# Create nodes
+supplier_0 = simulation.add_object(
+    Facility(
+        processing_min_time=0.8,
+        processing_avg_time=1.0,
+        processing_sd_time=0.02,
+        processing_cashflow_per_unit=-50,
+        metadata={
+            "loc": "cn_ningbo",
+            "otype": "node_supplier",
+        },
+    )
+)
+factory_1 = simulation.add_object(
+    Facility(
+        processing_min_time=0.2,
+        processing_avg_time=0.4,
+        processing_sd_time=0.1,
+        processing_cashflow_per_unit=-15,
+        metadata={
+            "loc": "us_ks_kc",
+            "otype": "node_factory",
+        },
+    )
+)
+
+# Create arcs between nodes
+arc_0_1 = simulation.add_object(
+    Arc(
+        origin_node=supplier_0,
+        destination_node=factory_1,
+        processing_min_time=2.0,
+        processing_avg_time=2.0,
+        processing_sd_time=0.05,
+        processing_cashflow_per_unit=-10,
+        metadata={
+            "loc": "oc_pa",
+            "otype": "arc_ocean",
+        },
+    )
+)
+
+order = simulation.add_object(
+    Order(
+        origin_node=supplier_0,
+        destination_node=factory_1,
+        units=1,
+        planned_path=simulation.graph.get_optimal_path(
+            supplier_0, factory_1, "cashflow"
+        ),
+    )
+)
+
+simulation.add_event(
+    time_delta=0.0,
+    func=order.start,
+)
+
+simulation.run(max_time=10.0)
+
+print(simulation.orders[0].history[-1]) #=>
+# {
+#     'time': 2.9971,
+#     'time_delta': 0.0,
+#     'order_id': 3,
+#     'current_obj_id': 1,
+#     'meta': {
+#         'loc': 'us_ks_kc',
+#         'otype': 'node_factory',
+#         'time': 2
+#     },
+#     'status': 'completed',
+#     'cashflow': 0.0
+# }
+
 ```
 
 ## Getting Started
 
 `scar` contains ...
-
-## Interactive Example
-
-```py
->>> import scar
-```
 
 ## Development
 
