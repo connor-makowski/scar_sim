@@ -1,7 +1,7 @@
-from scar.queue import Queue
-from scar.entity import Node, Arc, SimulationObject
-from scar.order import Order
-from scar.graph import Graph
+from scar_sim.queue import Queue
+from scar_sim.entity import Node, Arc, SimulationObject
+from scar_sim.order import Order
+from scar_sim.graph import Graph
 import dill
 
 

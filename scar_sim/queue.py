@@ -1,5 +1,5 @@
 from heapq import heappop, heappush
-from scar.utils import hard_round
+from scar_sim.utils import hard_round
 
 
 class Queue:

@@ -1,4 +1,4 @@
-from scar.entity import Node, Arc
+from scar_sim.entity import Node, Arc
 from scgraph import Graph as SCGraph
 from typing import Literal
 

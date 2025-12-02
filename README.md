@@ -1,6 +1,6 @@
-# SCAR
+# SCAR SIM
 
-Supply Chain Adaptation and Resilience
+Supply Chain Adaptation and Resilience Simulator
 
 # Setup
 
@@ -9,14 +9,14 @@ Make sure you have Python 3.11.x (or higher) installed on your system. You can d
 ## Installation
 
 ```
-pip install -e ./scar
+pip install -e ./scar_sim
 ```
 
 ## Basic Usage
 ```py
-from scar.entity import Facility, Arc, Node
-from scar.order import Order
-from scar.simulation import Simulation
+from scar_sim.entity import Facility, Arc, Node
+from scar_sim.order import Order
+from scar_sim.simulation import Simulation
 
 
 simulation = Simulation()
@@ -100,7 +100,7 @@ print(simulation.orders[0].history[-1]) #=>
 
 ## Getting Started
 
-`scar` contains ...
+`scar_sim` contains ...
 
 ## Development
 

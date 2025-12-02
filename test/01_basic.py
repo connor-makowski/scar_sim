@@ -1,6 +1,6 @@
-from scar.entity import Facility, Arc, Node
-from scar.order import Order
-from scar.simulation import Simulation
+from scar_sim.entity import Facility, Arc, Node
+from scar_sim.order import Order
+from scar_sim.simulation import Simulation
 
 
 # Class extensions for custom logic

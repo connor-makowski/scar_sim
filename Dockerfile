@@ -12,8 +12,8 @@ FROM python:3.13-slim
 WORKDIR /app/
 
 # Copy and install the requirements
-# This includes egg installing the scar package
-COPY scar/__init__.py /app/scar/__init__.py
+# This includes egg installing the scar_sim package
+COPY scar_sim/__init__.py /app/scar_sim/__init__.py
 COPY pyproject.toml /app/pyproject.toml
 COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt

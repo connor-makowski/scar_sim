@@ -1,4 +1,4 @@
-from scar.entity import Facility, Arc, Node, SimulationObject
+from scar_sim.entity import Facility, Arc, Node, SimulationObject
 
 
 class Order(SimulationObject):
