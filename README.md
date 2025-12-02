@@ -1,4 +1,6 @@
 # SCAR SIM
+[![PyPI version](https://badge.fury.io/py/scar_sim.svg)](https://badge.fury.io/py/scar_sim)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Supply Chain Adaptation and Resilience Simulator
 
@@ -9,10 +11,16 @@ Make sure you have Python 3.11.x (or higher) installed on your system. You can d
 ## Installation
 
 ```
-pip install -e ./scar_sim
+pip install scar_sim
 ```
 
-## Basic Usage
+## Getting Started
+
+- [Docs](https://connor-makowski.github.io/scar_sim/scar_sim.html)
+- [Git](https://github.com/connor-makowski/scar_sim)
+
+### Basic Example
+
 ```py
 from scar_sim.entity import Facility, Arc, Node
 from scar_sim.order import Order
@@ -97,10 +105,6 @@ print(simulation.orders[0].history[-1]) #=>
 # }
 
 ```
-
-## Getting Started
-
-`scar_sim` contains ...
 
 ## Development
 
