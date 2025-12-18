@@ -169,9 +169,7 @@ class Order(SimulationObject):
         if status == "started":
             # Validate that we are at a Node that can process orders
             if not isinstance(self.__current_object__, Node):
-                raise ValueError(
-                    "Current object must be a Node when started"
-                )
+                raise ValueError("Current object must be a Node when started")
             # Perform any logic at the origin node to process the order (i.e., remove from capacity)
             self.__current_object__.order_placed(self)
             # Set up for shipping
@@ -225,9 +223,7 @@ class Order(SimulationObject):
         elif status == "completed":
             # Validate that we are at a Node that can receive Orders
             if not isinstance(self.__current_object__, Node):
-                raise ValueError(
-                    "Current object must be a Node when completed"
-                )
+                raise ValueError("Current object must be a Node when completed")
             # Fire off the order completed event at the Node for processing (i.e., add to capacity)
             self.__current_object__.order_completed(self)
             # When called with "completed", we do not schedule any further events

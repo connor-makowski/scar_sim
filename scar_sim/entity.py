@@ -266,4 +266,3 @@ class Arc(SimulationEntity):
         super().__init__(**kwargs)
         self.origin_node = origin_node
         self.destination_node = destination_node
-
