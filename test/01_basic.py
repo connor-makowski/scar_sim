@@ -1,10 +1,10 @@
-from scar_sim.entity import Facility, Arc, Node
+from scar_sim.entity import Node, Arc
 from scar_sim.order import Order
 from scar_sim.simulation import Simulation
 
 
 # Class extensions for custom logic
-class Customer(Facility):
+class Customer(Node):
     def order_completed(self, order):
         # Set the order_completed method to allocate cashflow when an order completes at the customer.
         # This is needed because the Customer never ships the order further, so the cashflow must be
@@ -16,7 +16,7 @@ simulation = Simulation()
 
 # Create nodes
 supplier_00 = simulation.add_object(
-    Facility(
+    Node(
         processing_min_time=1,
         processing_avg_time=2,
         processing_sd_time=0.5,
@@ -28,7 +28,7 @@ supplier_00 = simulation.add_object(
     )
 )
 factory_01 = simulation.add_object(
-    Facility(
+    Node(
         processing_min_time=0.2,
         processing_avg_time=0.5,
         processing_sd_time=0.1,
@@ -41,7 +41,7 @@ factory_01 = simulation.add_object(
 )
 
 warehouse_02 = simulation.add_object(
-    Facility(
+    Node(
         processing_min_time=0.5,
         processing_avg_time=1,
         processing_sd_time=0.2,

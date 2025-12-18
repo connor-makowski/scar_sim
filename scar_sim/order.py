@@ -1,11 +1,11 @@
-from scar_sim.entity import Facility, Arc, Node, SimulationObject
+from scar_sim.entity import Arc, Node, SimulationObject
 
 
 class Order(SimulationObject):
     def __init__(
         self,
-        origin_node: Facility,
-        destination_node: Facility,
+        origin_node: Node,
+        destination_node: Node,
         units: int,
         planned_path: list[int],
     ):
@@ -14,8 +14,8 @@ class Order(SimulationObject):
 
         Required Arguments:
 
-        - origin_node (Facility): The starting facility for the order.
-        - destination_node (Facility): The ending facility for the order.
+        - origin_node (Node): The starting node for the order.
+        - destination_node (Node): The ending node for the order.
         - units (int): The number of units in the order.
         - planned_path (list[int]): The planned path for the order as a list of graph IDs.
         """
@@ -167,18 +167,18 @@ class Order(SimulationObject):
         self.__prev_time__ = self.__simulation__.current_time()
 
         if status == "started":
-            # Validate that we are at a Facility that can process orders
-            if not isinstance(self.__current_object__, Facility):
+            # Validate that we are at a Node that can process orders
+            if not isinstance(self.__current_object__, Node):
                 raise ValueError(
-                    "Current object must be a Facility when started"
+                    "Current object must be a Node when started"
                 )
-            # Perform any logic at the origin facility to process the order (i.e., remove from capacity)
+            # Perform any logic at the origin node to process the order (i.e., remove from capacity)
             self.__current_object__.order_placed(self)
             # Set up for shipping
             next_status = "shipped"
         elif status == "shipped":
-            # If the current object is a Facility, we need to ship the order (i.e., remove from inventory)
-            if isinstance(self.__current_object__, Facility):
+            # If the current object is a Node, we need to ship the order (i.e., remove from inventory)
+            if isinstance(self.__current_object__, Node):
                 self.__current_object__.order_shipped(self)
 
             # Pay for processing an order when it is shipped from a node
@@ -206,9 +206,9 @@ class Order(SimulationObject):
             should_reroute, new_path = self.consider_reroute()
             if should_reroute:
                 self.__set_planned_path__(new_path)
-            if isinstance(self.__current_object__, Facility):
-                # Only fire off the order arrived event if we are at a Facility and a reroute has not changed the path away from this Facility
-                # Fire off the order arrived event at the Facility for processing (i.e., add to inventory)
+            if isinstance(self.__current_object__, Node):
+                # Only fire off the order arrived event if we are at a Node and a reroute has not changed the path away from this Node
+                # Fire off the order arrived event at the Node for processing (i.e., add to inventory)
                 if len(self.__planned_path__) == self.__current_path_idx__:
                     # We are at the end of the path
                     self.__current_object__.order_arrived(self)
@@ -223,12 +223,12 @@ class Order(SimulationObject):
                 else "shipped"
             )
         elif status == "completed":
-            # Validate that we are at a Facility that can receive Orders
-            if not isinstance(self.__current_object__, Facility):
+            # Validate that we are at a Node that can receive Orders
+            if not isinstance(self.__current_object__, Node):
                 raise ValueError(
-                    "Current object must be a Facility when completed"
+                    "Current object must be a Node when completed"
                 )
-            # Fire off the order completed event at the Facility for processing (i.e., add to capacity)
+            # Fire off the order completed event at the Node for processing (i.e., add to capacity)
             self.__current_object__.order_completed(self)
             # When called with "completed", we do not schedule any further events
             return

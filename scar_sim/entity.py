@@ -193,6 +193,62 @@ class Node(SimulationEntity):
         self.inbound_graph_id = None
         self.outbound_graph_id = None
 
+    def order_arrived(self, order):
+        """
+        A placeholder method to handle logic when an order arrives at this node.
+        This can be overridden in subclasses to implement specific behavior.
+
+        Requires:
+
+        - order (Order): The order that has arrived.
+
+        Returns:
+
+        - None
+        """
+
+    def order_placed(self, order):
+        """
+        A placeholder method to handle logic when an order is placed at this node.
+        This can be overridden in subclasses to implement specific behavior.
+
+        Requires:
+
+        - order (Order): The order that has been placed.
+
+        Returns:
+
+        - None
+        """
+
+    def order_shipped(self, order):
+        """
+        A placeholder method to handle logic when an order is shipped from this node.
+        This can be overridden in subclasses to implement specific behavior.
+
+        Requires:
+
+        - order (Order): The order that has been shipped.
+
+        Returns:
+
+        - None
+        """
+
+    def order_completed(self, order):
+        """
+        A placeholder method to handle logic when an order is completed at this node.
+        This can be overridden in subclasses to implement specific behavior.
+
+        Requires:
+
+        - order (Order): The order that has been completed.
+
+        Returns:
+
+        - None
+        """
+
 
 class Arc(SimulationEntity):
     def __init__(self, origin_node: Node, destination_node: Node, **kwargs):
@@ -211,66 +267,3 @@ class Arc(SimulationEntity):
         self.origin_node = origin_node
         self.destination_node = destination_node
 
-
-class Facility(Node):
-    """
-    A Facility class to represent nodes that can handle orders.
-
-    This class is expected to be subclassed to implement specific facility behavior.
-    """
-
-    def order_arrived(self, order):
-        """
-        A placeholder method to handle logic when an order arrives at this facility.
-        This can be overridden in subclasses to implement specific behavior.
-
-        Requires:
-
-        - order (Order): The order that has arrived.
-
-        Returns:
-
-        - None
-        """
-
-    def order_placed(self, order):
-        """
-        A placeholder method to handle logic when an order is placed at this facility.
-        This can be overridden in subclasses to implement specific behavior.
-
-        Requires:
-
-        - order (Order): The order that has been placed.
-
-        Returns:
-
-        - None
-        """
-
-    def order_shipped(self, order):
-        """
-        A placeholder method to handle logic when an order is shipped from this facility.
-        This can be overridden in subclasses to implement specific behavior.
-
-        Requires:
-
-        - order (Order): The order that has been shipped.
-
-        Returns:
-
-        - None
-        """
-
-    def order_completed(self, order):
-        """
-        A placeholder method to handle logic when an order is completed at this facility.
-        This can be overridden in subclasses to implement specific behavior.
-
-        Requires:
-
-        - order (Order): The order that has been completed.
-
-        Returns:
-
-        - None
-        """

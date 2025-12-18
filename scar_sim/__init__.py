@@ -15,7 +15,7 @@ pip install -e ./scar_sim
 
 ## Basic Usage
 ```py
-from scar_sim.entity import Facility, Arc, Node
+from scar_sim.entity import Arc, Node
 from scar_sim.order import Order
 from scar_sim.simulation import Simulation
 
@@ -24,7 +24,7 @@ simulation = Simulation()
 
 # Create nodes
 supplier_0 = simulation.add_object(
-    Facility(
+    Node(
         processing_min_time=0.8,
         processing_avg_time=1.0,
         processing_sd_time=0.02,
@@ -36,7 +36,7 @@ supplier_0 = simulation.add_object(
     )
 )
 factory_1 = simulation.add_object(
-    Facility(
+    Node(
         processing_min_time=0.2,
         processing_avg_time=0.4,
         processing_sd_time=0.1,
