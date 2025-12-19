@@ -10,7 +10,7 @@ echo "" >> scar_sim/__init__.py
 
 # Specify versions for documentation purposes
 VERSION="0.0.3"
-OLD_DOC_VERSIONS=""
+OLD_DOC_VERSIONS="0.0.2 0.0.1"
 export version_options="$VERSION $OLD_DOC_VERSIONS"
 
 # generate the docs for a version function:

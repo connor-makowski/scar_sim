@@ -99,18 +99,6 @@
                         <li>
                                 <a class="variable" href="#Node.outbound_graph_id">outbound_graph_id</a>
                         </li>
-                        <li>
-                                <a class="function" href="#Node.order_arrived">order_arrived</a>
-                        </li>
-                        <li>
-                                <a class="function" href="#Node.order_placed">order_placed</a>
-                        </li>
-                        <li>
-                                <a class="function" href="#Node.order_shipped">order_shipped</a>
-                        </li>
-                        <li>
-                                <a class="function" href="#Node.order_completed">order_completed</a>
-                        </li>
                 </ul>
 
             </li>
@@ -125,6 +113,24 @@
                         </li>
                         <li>
                                 <a class="variable" href="#Arc.destination_node">destination_node</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#Facility">Facility</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#Facility.order_arrived">order_arrived</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Facility.order_placed">order_placed</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Facility.order_shipped">order_shipped</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Facility.order_completed">order_completed</a>
                         </li>
                 </ul>
 
@@ -380,79 +386,87 @@
 </span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inbound_graph_id</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">outbound_graph_id</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="L-195"><a href="#L-195"><span class="linenos">195</span></a>
-</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_arrived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a><span class="sd">        A placeholder method to handle logic when an order arrives at this node.</span>
-</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a>
-</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a><span class="sd">        Requires:</span>
-</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a>
-</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a><span class="sd">        - order (Order): The order that has arrived.</span>
-</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a>
-</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a><span class="sd">        Returns:</span>
-</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a>
-</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="sd">        - None</span>
-</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a>
-</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_placed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a><span class="sd">        A placeholder method to handle logic when an order is placed at this node.</span>
-</span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="L-196"><a href="#L-196"><span class="linenos">196</span></a>
+</span><span id="L-197"><a href="#L-197"><span class="linenos">197</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Arc</span><span class="p">(</span><span class="n">SimulationEntity</span><span class="p">):</span>
+</span><span id="L-198"><a href="#L-198"><span class="linenos">198</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">destination_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="L-199"><a href="#L-199"><span class="linenos">199</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-200"><a href="#L-200"><span class="linenos">200</span></a><span class="sd">        Initializes an Arc entity connecting two nodes with processing parameters and metadata.</span>
+</span><span id="L-201"><a href="#L-201"><span class="linenos">201</span></a>
+</span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a><span class="sd">        Arcs represent connections between nodes in the simulation, modeling the flow of entities such as orders or goods.</span>
+</span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a>
+</span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a><span class="sd">        Required Arguments:</span>
+</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a>
+</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a><span class="sd">        - origin_node (Node): The node where the arc originates.</span>
+</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="sd">        - destination_node (Node): The node where the arc terminates.</span>
+</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a><span class="sd">        - kwargs: Additional keyword arguments passed to the SimulationEntity __init__ function.</span>
+</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">origin_node</span> <span class="o">=</span> <span class="n">origin_node</span>
+</span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">destination_node</span> <span class="o">=</span> <span class="n">destination_node</span>
+</span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a>
 </span><span id="L-214"><a href="#L-214"><span class="linenos">214</span></a>
-</span><span id="L-215"><a href="#L-215"><span class="linenos">215</span></a><span class="sd">        Requires:</span>
-</span><span id="L-216"><a href="#L-216"><span class="linenos">216</span></a>
-</span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a><span class="sd">        - order (Order): The order that has been placed.</span>
+</span><span id="L-215"><a href="#L-215"><span class="linenos">215</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Facility</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span><span id="L-216"><a href="#L-216"><span class="linenos">216</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a><span class="sd">    A Facility class to represent nodes that can handle orders.</span>
 </span><span id="L-218"><a href="#L-218"><span class="linenos">218</span></a>
-</span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a><span class="sd">        Returns:</span>
-</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a>
-</span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a><span class="sd">        - None</span>
-</span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a>
-</span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_shipped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-226"><a href="#L-226"><span class="linenos">226</span></a><span class="sd">        A placeholder method to handle logic when an order is shipped from this node.</span>
-</span><span id="L-227"><a href="#L-227"><span class="linenos">227</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a><span class="sd">    This class is expected to be subclassed to implement specific facility behavior.</span>
+</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a>
+</span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_arrived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-224"><a href="#L-224"><span class="linenos">224</span></a><span class="sd">        A placeholder method to handle logic when an order arrives at this facility.</span>
+</span><span id="L-225"><a href="#L-225"><span class="linenos">225</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="L-226"><a href="#L-226"><span class="linenos">226</span></a>
+</span><span id="L-227"><a href="#L-227"><span class="linenos">227</span></a><span class="sd">        Requires:</span>
 </span><span id="L-228"><a href="#L-228"><span class="linenos">228</span></a>
-</span><span id="L-229"><a href="#L-229"><span class="linenos">229</span></a><span class="sd">        Requires:</span>
+</span><span id="L-229"><a href="#L-229"><span class="linenos">229</span></a><span class="sd">        - order (Order): The order that has arrived.</span>
 </span><span id="L-230"><a href="#L-230"><span class="linenos">230</span></a>
-</span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a><span class="sd">        - order (Order): The order that has been shipped.</span>
+</span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a><span class="sd">        Returns:</span>
 </span><span id="L-232"><a href="#L-232"><span class="linenos">232</span></a>
-</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a><span class="sd">        Returns:</span>
-</span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a>
-</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a><span class="sd">        - None</span>
-</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a>
-</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a><span class="sd">        A placeholder method to handle logic when an order is completed at this node.</span>
-</span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a><span class="sd">        - None</span>
+</span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a>
+</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_placed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a><span class="sd">        A placeholder method to handle logic when an order is placed at this facility.</span>
+</span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a>
+</span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a><span class="sd">        Requires:</span>
 </span><span id="L-242"><a href="#L-242"><span class="linenos">242</span></a>
-</span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a><span class="sd">        Requires:</span>
+</span><span id="L-243"><a href="#L-243"><span class="linenos">243</span></a><span class="sd">        - order (Order): The order that has been placed.</span>
 </span><span id="L-244"><a href="#L-244"><span class="linenos">244</span></a>
-</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a><span class="sd">        - order (Order): The order that has been completed.</span>
+</span><span id="L-245"><a href="#L-245"><span class="linenos">245</span></a><span class="sd">        Returns:</span>
 </span><span id="L-246"><a href="#L-246"><span class="linenos">246</span></a>
-</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a><span class="sd">        Returns:</span>
-</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a>
-</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a><span class="sd">        - None</span>
-</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a>
-</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a>
-</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Arc</span><span class="p">(</span><span class="n">SimulationEntity</span><span class="p">):</span>
-</span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">destination_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a><span class="sd">        Initializes an Arc entity connecting two nodes with processing parameters and metadata.</span>
-</span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a>
-</span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a><span class="sd">        Arcs represent connections between nodes in the simulation, modeling the flow of entities such as orders or goods.</span>
-</span><span id="L-259"><a href="#L-259"><span class="linenos">259</span></a>
-</span><span id="L-260"><a href="#L-260"><span class="linenos">260</span></a><span class="sd">        Required Arguments:</span>
-</span><span id="L-261"><a href="#L-261"><span class="linenos">261</span></a>
-</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a><span class="sd">        - origin_node (Node): The node where the arc originates.</span>
-</span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a><span class="sd">        - destination_node (Node): The node where the arc terminates.</span>
-</span><span id="L-264"><a href="#L-264"><span class="linenos">264</span></a><span class="sd">        - kwargs: Additional keyword arguments passed to the SimulationEntity __init__ function.</span>
-</span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-266"><a href="#L-266"><span class="linenos">266</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="L-267"><a href="#L-267"><span class="linenos">267</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">origin_node</span> <span class="o">=</span> <span class="n">origin_node</span>
-</span><span id="L-268"><a href="#L-268"><span class="linenos">268</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">destination_node</span> <span class="o">=</span> <span class="n">destination_node</span>
+</span><span id="L-247"><a href="#L-247"><span class="linenos">247</span></a><span class="sd">        - None</span>
+</span><span id="L-248"><a href="#L-248"><span class="linenos">248</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-249"><a href="#L-249"><span class="linenos">249</span></a>
+</span><span id="L-250"><a href="#L-250"><span class="linenos">250</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_shipped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="L-251"><a href="#L-251"><span class="linenos">251</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-252"><a href="#L-252"><span class="linenos">252</span></a><span class="sd">        A placeholder method to handle logic when an order is shipped from this facility.</span>
+</span><span id="L-253"><a href="#L-253"><span class="linenos">253</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="L-254"><a href="#L-254"><span class="linenos">254</span></a>
+</span><span id="L-255"><a href="#L-255"><span class="linenos">255</span></a><span class="sd">        Requires:</span>
+</span><span id="L-256"><a href="#L-256"><span class="linenos">256</span></a>
+</span><span id="L-257"><a href="#L-257"><span class="linenos">257</span></a><span class="sd">        - order (Order): The order that has been shipped.</span>
+</span><span id="L-258"><a href="#L-258"><span class="linenos">258</span></a>
+</span><span id="L-259"><a href="#L-259"><span class="linenos">259</span></a><span class="sd">        Returns:</span>
+</span><span id="L-260"><a href="#L-260"><span class="linenos">260</span></a>
+</span><span id="L-261"><a href="#L-261"><span class="linenos">261</span></a><span class="sd">        - None</span>
+</span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a>
+</span><span id="L-264"><a href="#L-264"><span class="linenos">264</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-266"><a href="#L-266"><span class="linenos">266</span></a><span class="sd">        A placeholder method to handle logic when an order is completed at this facility.</span>
+</span><span id="L-267"><a href="#L-267"><span class="linenos">267</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="L-268"><a href="#L-268"><span class="linenos">268</span></a>
+</span><span id="L-269"><a href="#L-269"><span class="linenos">269</span></a><span class="sd">        Requires:</span>
+</span><span id="L-270"><a href="#L-270"><span class="linenos">270</span></a>
+</span><span id="L-271"><a href="#L-271"><span class="linenos">271</span></a><span class="sd">        - order (Order): The order that has been completed.</span>
+</span><span id="L-272"><a href="#L-272"><span class="linenos">272</span></a>
+</span><span id="L-273"><a href="#L-273"><span class="linenos">273</span></a><span class="sd">        Returns:</span>
+</span><span id="L-274"><a href="#L-274"><span class="linenos">274</span></a>
+</span><span id="L-275"><a href="#L-275"><span class="linenos">275</span></a><span class="sd">        - None</span>
+</span><span id="L-276"><a href="#L-276"><span class="linenos">276</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -1151,62 +1165,6 @@
 </span><span id="Node-193"><a href="#Node-193"><span class="linenos">193</span></a>        <span class="c1"># Connected by an arc that represents processing time and cashflow at the node</span>
 </span><span id="Node-194"><a href="#Node-194"><span class="linenos">194</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inbound_graph_id</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="Node-195"><a href="#Node-195"><span class="linenos">195</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">outbound_graph_id</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Node-196"><a href="#Node-196"><span class="linenos">196</span></a>
-</span><span id="Node-197"><a href="#Node-197"><span class="linenos">197</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_arrived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node-198"><a href="#Node-198"><span class="linenos">198</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node-199"><a href="#Node-199"><span class="linenos">199</span></a><span class="sd">        A placeholder method to handle logic when an order arrives at this node.</span>
-</span><span id="Node-200"><a href="#Node-200"><span class="linenos">200</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node-201"><a href="#Node-201"><span class="linenos">201</span></a>
-</span><span id="Node-202"><a href="#Node-202"><span class="linenos">202</span></a><span class="sd">        Requires:</span>
-</span><span id="Node-203"><a href="#Node-203"><span class="linenos">203</span></a>
-</span><span id="Node-204"><a href="#Node-204"><span class="linenos">204</span></a><span class="sd">        - order (Order): The order that has arrived.</span>
-</span><span id="Node-205"><a href="#Node-205"><span class="linenos">205</span></a>
-</span><span id="Node-206"><a href="#Node-206"><span class="linenos">206</span></a><span class="sd">        Returns:</span>
-</span><span id="Node-207"><a href="#Node-207"><span class="linenos">207</span></a>
-</span><span id="Node-208"><a href="#Node-208"><span class="linenos">208</span></a><span class="sd">        - None</span>
-</span><span id="Node-209"><a href="#Node-209"><span class="linenos">209</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Node-210"><a href="#Node-210"><span class="linenos">210</span></a>
-</span><span id="Node-211"><a href="#Node-211"><span class="linenos">211</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_placed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node-212"><a href="#Node-212"><span class="linenos">212</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node-213"><a href="#Node-213"><span class="linenos">213</span></a><span class="sd">        A placeholder method to handle logic when an order is placed at this node.</span>
-</span><span id="Node-214"><a href="#Node-214"><span class="linenos">214</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node-215"><a href="#Node-215"><span class="linenos">215</span></a>
-</span><span id="Node-216"><a href="#Node-216"><span class="linenos">216</span></a><span class="sd">        Requires:</span>
-</span><span id="Node-217"><a href="#Node-217"><span class="linenos">217</span></a>
-</span><span id="Node-218"><a href="#Node-218"><span class="linenos">218</span></a><span class="sd">        - order (Order): The order that has been placed.</span>
-</span><span id="Node-219"><a href="#Node-219"><span class="linenos">219</span></a>
-</span><span id="Node-220"><a href="#Node-220"><span class="linenos">220</span></a><span class="sd">        Returns:</span>
-</span><span id="Node-221"><a href="#Node-221"><span class="linenos">221</span></a>
-</span><span id="Node-222"><a href="#Node-222"><span class="linenos">222</span></a><span class="sd">        - None</span>
-</span><span id="Node-223"><a href="#Node-223"><span class="linenos">223</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Node-224"><a href="#Node-224"><span class="linenos">224</span></a>
-</span><span id="Node-225"><a href="#Node-225"><span class="linenos">225</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_shipped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node-226"><a href="#Node-226"><span class="linenos">226</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node-227"><a href="#Node-227"><span class="linenos">227</span></a><span class="sd">        A placeholder method to handle logic when an order is shipped from this node.</span>
-</span><span id="Node-228"><a href="#Node-228"><span class="linenos">228</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node-229"><a href="#Node-229"><span class="linenos">229</span></a>
-</span><span id="Node-230"><a href="#Node-230"><span class="linenos">230</span></a><span class="sd">        Requires:</span>
-</span><span id="Node-231"><a href="#Node-231"><span class="linenos">231</span></a>
-</span><span id="Node-232"><a href="#Node-232"><span class="linenos">232</span></a><span class="sd">        - order (Order): The order that has been shipped.</span>
-</span><span id="Node-233"><a href="#Node-233"><span class="linenos">233</span></a>
-</span><span id="Node-234"><a href="#Node-234"><span class="linenos">234</span></a><span class="sd">        Returns:</span>
-</span><span id="Node-235"><a href="#Node-235"><span class="linenos">235</span></a>
-</span><span id="Node-236"><a href="#Node-236"><span class="linenos">236</span></a><span class="sd">        - None</span>
-</span><span id="Node-237"><a href="#Node-237"><span class="linenos">237</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Node-238"><a href="#Node-238"><span class="linenos">238</span></a>
-</span><span id="Node-239"><a href="#Node-239"><span class="linenos">239</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node-240"><a href="#Node-240"><span class="linenos">240</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node-241"><a href="#Node-241"><span class="linenos">241</span></a><span class="sd">        A placeholder method to handle logic when an order is completed at this node.</span>
-</span><span id="Node-242"><a href="#Node-242"><span class="linenos">242</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node-243"><a href="#Node-243"><span class="linenos">243</span></a>
-</span><span id="Node-244"><a href="#Node-244"><span class="linenos">244</span></a><span class="sd">        Requires:</span>
-</span><span id="Node-245"><a href="#Node-245"><span class="linenos">245</span></a>
-</span><span id="Node-246"><a href="#Node-246"><span class="linenos">246</span></a><span class="sd">        - order (Order): The order that has been completed.</span>
-</span><span id="Node-247"><a href="#Node-247"><span class="linenos">247</span></a>
-</span><span id="Node-248"><a href="#Node-248"><span class="linenos">248</span></a><span class="sd">        Returns:</span>
-</span><span id="Node-249"><a href="#Node-249"><span class="linenos">249</span></a>
-</span><span id="Node-250"><a href="#Node-250"><span class="linenos">250</span></a><span class="sd">        - None</span>
-</span><span id="Node-251"><a href="#Node-251"><span class="linenos">251</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span></pre></div>
 
 
@@ -1291,186 +1249,6 @@
     
 
                             </div>
-                            <div id="Node.order_arrived" class="classattr">
-                                        <input id="Node.order_arrived-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">order_arrived</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="Node.order_arrived-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#Node.order_arrived"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Node.order_arrived-197"><a href="#Node.order_arrived-197"><span class="linenos">197</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_arrived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node.order_arrived-198"><a href="#Node.order_arrived-198"><span class="linenos">198</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node.order_arrived-199"><a href="#Node.order_arrived-199"><span class="linenos">199</span></a><span class="sd">        A placeholder method to handle logic when an order arrives at this node.</span>
-</span><span id="Node.order_arrived-200"><a href="#Node.order_arrived-200"><span class="linenos">200</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node.order_arrived-201"><a href="#Node.order_arrived-201"><span class="linenos">201</span></a>
-</span><span id="Node.order_arrived-202"><a href="#Node.order_arrived-202"><span class="linenos">202</span></a><span class="sd">        Requires:</span>
-</span><span id="Node.order_arrived-203"><a href="#Node.order_arrived-203"><span class="linenos">203</span></a>
-</span><span id="Node.order_arrived-204"><a href="#Node.order_arrived-204"><span class="linenos">204</span></a><span class="sd">        - order (Order): The order that has arrived.</span>
-</span><span id="Node.order_arrived-205"><a href="#Node.order_arrived-205"><span class="linenos">205</span></a>
-</span><span id="Node.order_arrived-206"><a href="#Node.order_arrived-206"><span class="linenos">206</span></a><span class="sd">        Returns:</span>
-</span><span id="Node.order_arrived-207"><a href="#Node.order_arrived-207"><span class="linenos">207</span></a>
-</span><span id="Node.order_arrived-208"><a href="#Node.order_arrived-208"><span class="linenos">208</span></a><span class="sd">        - None</span>
-</span><span id="Node.order_arrived-209"><a href="#Node.order_arrived-209"><span class="linenos">209</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>A placeholder method to handle logic when an order arrives at this node.
-This can be overridden in subclasses to implement specific behavior.</p>
-
-<p>Requires:</p>
-
-<ul>
-<li>order (Order): The order that has arrived.</li>
-</ul>
-
-<p>Returns:</p>
-
-<ul>
-<li>None</li>
-</ul>
-</div>
-
-
-                            </div>
-                            <div id="Node.order_placed" class="classattr">
-                                        <input id="Node.order_placed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">order_placed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="Node.order_placed-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#Node.order_placed"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Node.order_placed-211"><a href="#Node.order_placed-211"><span class="linenos">211</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_placed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node.order_placed-212"><a href="#Node.order_placed-212"><span class="linenos">212</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node.order_placed-213"><a href="#Node.order_placed-213"><span class="linenos">213</span></a><span class="sd">        A placeholder method to handle logic when an order is placed at this node.</span>
-</span><span id="Node.order_placed-214"><a href="#Node.order_placed-214"><span class="linenos">214</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node.order_placed-215"><a href="#Node.order_placed-215"><span class="linenos">215</span></a>
-</span><span id="Node.order_placed-216"><a href="#Node.order_placed-216"><span class="linenos">216</span></a><span class="sd">        Requires:</span>
-</span><span id="Node.order_placed-217"><a href="#Node.order_placed-217"><span class="linenos">217</span></a>
-</span><span id="Node.order_placed-218"><a href="#Node.order_placed-218"><span class="linenos">218</span></a><span class="sd">        - order (Order): The order that has been placed.</span>
-</span><span id="Node.order_placed-219"><a href="#Node.order_placed-219"><span class="linenos">219</span></a>
-</span><span id="Node.order_placed-220"><a href="#Node.order_placed-220"><span class="linenos">220</span></a><span class="sd">        Returns:</span>
-</span><span id="Node.order_placed-221"><a href="#Node.order_placed-221"><span class="linenos">221</span></a>
-</span><span id="Node.order_placed-222"><a href="#Node.order_placed-222"><span class="linenos">222</span></a><span class="sd">        - None</span>
-</span><span id="Node.order_placed-223"><a href="#Node.order_placed-223"><span class="linenos">223</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>A placeholder method to handle logic when an order is placed at this node.
-This can be overridden in subclasses to implement specific behavior.</p>
-
-<p>Requires:</p>
-
-<ul>
-<li>order (Order): The order that has been placed.</li>
-</ul>
-
-<p>Returns:</p>
-
-<ul>
-<li>None</li>
-</ul>
-</div>
-
-
-                            </div>
-                            <div id="Node.order_shipped" class="classattr">
-                                        <input id="Node.order_shipped-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">order_shipped</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="Node.order_shipped-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#Node.order_shipped"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Node.order_shipped-225"><a href="#Node.order_shipped-225"><span class="linenos">225</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_shipped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node.order_shipped-226"><a href="#Node.order_shipped-226"><span class="linenos">226</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node.order_shipped-227"><a href="#Node.order_shipped-227"><span class="linenos">227</span></a><span class="sd">        A placeholder method to handle logic when an order is shipped from this node.</span>
-</span><span id="Node.order_shipped-228"><a href="#Node.order_shipped-228"><span class="linenos">228</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node.order_shipped-229"><a href="#Node.order_shipped-229"><span class="linenos">229</span></a>
-</span><span id="Node.order_shipped-230"><a href="#Node.order_shipped-230"><span class="linenos">230</span></a><span class="sd">        Requires:</span>
-</span><span id="Node.order_shipped-231"><a href="#Node.order_shipped-231"><span class="linenos">231</span></a>
-</span><span id="Node.order_shipped-232"><a href="#Node.order_shipped-232"><span class="linenos">232</span></a><span class="sd">        - order (Order): The order that has been shipped.</span>
-</span><span id="Node.order_shipped-233"><a href="#Node.order_shipped-233"><span class="linenos">233</span></a>
-</span><span id="Node.order_shipped-234"><a href="#Node.order_shipped-234"><span class="linenos">234</span></a><span class="sd">        Returns:</span>
-</span><span id="Node.order_shipped-235"><a href="#Node.order_shipped-235"><span class="linenos">235</span></a>
-</span><span id="Node.order_shipped-236"><a href="#Node.order_shipped-236"><span class="linenos">236</span></a><span class="sd">        - None</span>
-</span><span id="Node.order_shipped-237"><a href="#Node.order_shipped-237"><span class="linenos">237</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>A placeholder method to handle logic when an order is shipped from this node.
-This can be overridden in subclasses to implement specific behavior.</p>
-
-<p>Requires:</p>
-
-<ul>
-<li>order (Order): The order that has been shipped.</li>
-</ul>
-
-<p>Returns:</p>
-
-<ul>
-<li>None</li>
-</ul>
-</div>
-
-
-                            </div>
-                            <div id="Node.order_completed" class="classattr">
-                                        <input id="Node.order_completed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">order_completed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="Node.order_completed-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#Node.order_completed"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Node.order_completed-239"><a href="#Node.order_completed-239"><span class="linenos">239</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-</span><span id="Node.order_completed-240"><a href="#Node.order_completed-240"><span class="linenos">240</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Node.order_completed-241"><a href="#Node.order_completed-241"><span class="linenos">241</span></a><span class="sd">        A placeholder method to handle logic when an order is completed at this node.</span>
-</span><span id="Node.order_completed-242"><a href="#Node.order_completed-242"><span class="linenos">242</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
-</span><span id="Node.order_completed-243"><a href="#Node.order_completed-243"><span class="linenos">243</span></a>
-</span><span id="Node.order_completed-244"><a href="#Node.order_completed-244"><span class="linenos">244</span></a><span class="sd">        Requires:</span>
-</span><span id="Node.order_completed-245"><a href="#Node.order_completed-245"><span class="linenos">245</span></a>
-</span><span id="Node.order_completed-246"><a href="#Node.order_completed-246"><span class="linenos">246</span></a><span class="sd">        - order (Order): The order that has been completed.</span>
-</span><span id="Node.order_completed-247"><a href="#Node.order_completed-247"><span class="linenos">247</span></a>
-</span><span id="Node.order_completed-248"><a href="#Node.order_completed-248"><span class="linenos">248</span></a><span class="sd">        Returns:</span>
-</span><span id="Node.order_completed-249"><a href="#Node.order_completed-249"><span class="linenos">249</span></a>
-</span><span id="Node.order_completed-250"><a href="#Node.order_completed-250"><span class="linenos">250</span></a><span class="sd">        - None</span>
-</span><span id="Node.order_completed-251"><a href="#Node.order_completed-251"><span class="linenos">251</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>A placeholder method to handle logic when an order is completed at this node.
-This can be overridden in subclasses to implement specific behavior.</p>
-
-<p>Requires:</p>
-
-<ul>
-<li>order (Order): The order that has been completed.</li>
-</ul>
-
-<p>Returns:</p>
-
-<ul>
-<li>None</li>
-</ul>
-</div>
-
-
-                            </div>
                             <div class="inherited">
                                 <h5>Inherited Members</h5>
                                 <dl>
@@ -1507,22 +1285,22 @@ This can be overridden in subclasses to implement specific behavior.</p>
 
     </div>
     <a class="headerlink" href="#Arc"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Arc-254"><a href="#Arc-254"><span class="linenos">254</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Arc</span><span class="p">(</span><span class="n">SimulationEntity</span><span class="p">):</span>
-</span><span id="Arc-255"><a href="#Arc-255"><span class="linenos">255</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">destination_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="Arc-256"><a href="#Arc-256"><span class="linenos">256</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Arc-257"><a href="#Arc-257"><span class="linenos">257</span></a><span class="sd">        Initializes an Arc entity connecting two nodes with processing parameters and metadata.</span>
-</span><span id="Arc-258"><a href="#Arc-258"><span class="linenos">258</span></a>
-</span><span id="Arc-259"><a href="#Arc-259"><span class="linenos">259</span></a><span class="sd">        Arcs represent connections between nodes in the simulation, modeling the flow of entities such as orders or goods.</span>
-</span><span id="Arc-260"><a href="#Arc-260"><span class="linenos">260</span></a>
-</span><span id="Arc-261"><a href="#Arc-261"><span class="linenos">261</span></a><span class="sd">        Required Arguments:</span>
-</span><span id="Arc-262"><a href="#Arc-262"><span class="linenos">262</span></a>
-</span><span id="Arc-263"><a href="#Arc-263"><span class="linenos">263</span></a><span class="sd">        - origin_node (Node): The node where the arc originates.</span>
-</span><span id="Arc-264"><a href="#Arc-264"><span class="linenos">264</span></a><span class="sd">        - destination_node (Node): The node where the arc terminates.</span>
-</span><span id="Arc-265"><a href="#Arc-265"><span class="linenos">265</span></a><span class="sd">        - kwargs: Additional keyword arguments passed to the SimulationEntity __init__ function.</span>
-</span><span id="Arc-266"><a href="#Arc-266"><span class="linenos">266</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Arc-267"><a href="#Arc-267"><span class="linenos">267</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="Arc-268"><a href="#Arc-268"><span class="linenos">268</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">origin_node</span> <span class="o">=</span> <span class="n">origin_node</span>
-</span><span id="Arc-269"><a href="#Arc-269"><span class="linenos">269</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">destination_node</span> <span class="o">=</span> <span class="n">destination_node</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Arc-198"><a href="#Arc-198"><span class="linenos">198</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Arc</span><span class="p">(</span><span class="n">SimulationEntity</span><span class="p">):</span>
+</span><span id="Arc-199"><a href="#Arc-199"><span class="linenos">199</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">destination_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="Arc-200"><a href="#Arc-200"><span class="linenos">200</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Arc-201"><a href="#Arc-201"><span class="linenos">201</span></a><span class="sd">        Initializes an Arc entity connecting two nodes with processing parameters and metadata.</span>
+</span><span id="Arc-202"><a href="#Arc-202"><span class="linenos">202</span></a>
+</span><span id="Arc-203"><a href="#Arc-203"><span class="linenos">203</span></a><span class="sd">        Arcs represent connections between nodes in the simulation, modeling the flow of entities such as orders or goods.</span>
+</span><span id="Arc-204"><a href="#Arc-204"><span class="linenos">204</span></a>
+</span><span id="Arc-205"><a href="#Arc-205"><span class="linenos">205</span></a><span class="sd">        Required Arguments:</span>
+</span><span id="Arc-206"><a href="#Arc-206"><span class="linenos">206</span></a>
+</span><span id="Arc-207"><a href="#Arc-207"><span class="linenos">207</span></a><span class="sd">        - origin_node (Node): The node where the arc originates.</span>
+</span><span id="Arc-208"><a href="#Arc-208"><span class="linenos">208</span></a><span class="sd">        - destination_node (Node): The node where the arc terminates.</span>
+</span><span id="Arc-209"><a href="#Arc-209"><span class="linenos">209</span></a><span class="sd">        - kwargs: Additional keyword arguments passed to the SimulationEntity __init__ function.</span>
+</span><span id="Arc-210"><a href="#Arc-210"><span class="linenos">210</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Arc-211"><a href="#Arc-211"><span class="linenos">211</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="Arc-212"><a href="#Arc-212"><span class="linenos">212</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">origin_node</span> <span class="o">=</span> <span class="n">origin_node</span>
+</span><span id="Arc-213"><a href="#Arc-213"><span class="linenos">213</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">destination_node</span> <span class="o">=</span> <span class="n">destination_node</span>
 </span></pre></div>
 
 
@@ -1538,21 +1316,21 @@ This can be overridden in subclasses to implement specific behavior.</p>
 
     </div>
     <a class="headerlink" href="#Arc.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Arc.__init__-255"><a href="#Arc.__init__-255"><span class="linenos">255</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">destination_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="Arc.__init__-256"><a href="#Arc.__init__-256"><span class="linenos">256</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Arc.__init__-257"><a href="#Arc.__init__-257"><span class="linenos">257</span></a><span class="sd">        Initializes an Arc entity connecting two nodes with processing parameters and metadata.</span>
-</span><span id="Arc.__init__-258"><a href="#Arc.__init__-258"><span class="linenos">258</span></a>
-</span><span id="Arc.__init__-259"><a href="#Arc.__init__-259"><span class="linenos">259</span></a><span class="sd">        Arcs represent connections between nodes in the simulation, modeling the flow of entities such as orders or goods.</span>
-</span><span id="Arc.__init__-260"><a href="#Arc.__init__-260"><span class="linenos">260</span></a>
-</span><span id="Arc.__init__-261"><a href="#Arc.__init__-261"><span class="linenos">261</span></a><span class="sd">        Required Arguments:</span>
-</span><span id="Arc.__init__-262"><a href="#Arc.__init__-262"><span class="linenos">262</span></a>
-</span><span id="Arc.__init__-263"><a href="#Arc.__init__-263"><span class="linenos">263</span></a><span class="sd">        - origin_node (Node): The node where the arc originates.</span>
-</span><span id="Arc.__init__-264"><a href="#Arc.__init__-264"><span class="linenos">264</span></a><span class="sd">        - destination_node (Node): The node where the arc terminates.</span>
-</span><span id="Arc.__init__-265"><a href="#Arc.__init__-265"><span class="linenos">265</span></a><span class="sd">        - kwargs: Additional keyword arguments passed to the SimulationEntity __init__ function.</span>
-</span><span id="Arc.__init__-266"><a href="#Arc.__init__-266"><span class="linenos">266</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Arc.__init__-267"><a href="#Arc.__init__-267"><span class="linenos">267</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="Arc.__init__-268"><a href="#Arc.__init__-268"><span class="linenos">268</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">origin_node</span> <span class="o">=</span> <span class="n">origin_node</span>
-</span><span id="Arc.__init__-269"><a href="#Arc.__init__-269"><span class="linenos">269</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">destination_node</span> <span class="o">=</span> <span class="n">destination_node</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Arc.__init__-199"><a href="#Arc.__init__-199"><span class="linenos">199</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">destination_node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="Arc.__init__-200"><a href="#Arc.__init__-200"><span class="linenos">200</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Arc.__init__-201"><a href="#Arc.__init__-201"><span class="linenos">201</span></a><span class="sd">        Initializes an Arc entity connecting two nodes with processing parameters and metadata.</span>
+</span><span id="Arc.__init__-202"><a href="#Arc.__init__-202"><span class="linenos">202</span></a>
+</span><span id="Arc.__init__-203"><a href="#Arc.__init__-203"><span class="linenos">203</span></a><span class="sd">        Arcs represent connections between nodes in the simulation, modeling the flow of entities such as orders or goods.</span>
+</span><span id="Arc.__init__-204"><a href="#Arc.__init__-204"><span class="linenos">204</span></a>
+</span><span id="Arc.__init__-205"><a href="#Arc.__init__-205"><span class="linenos">205</span></a><span class="sd">        Required Arguments:</span>
+</span><span id="Arc.__init__-206"><a href="#Arc.__init__-206"><span class="linenos">206</span></a>
+</span><span id="Arc.__init__-207"><a href="#Arc.__init__-207"><span class="linenos">207</span></a><span class="sd">        - origin_node (Node): The node where the arc originates.</span>
+</span><span id="Arc.__init__-208"><a href="#Arc.__init__-208"><span class="linenos">208</span></a><span class="sd">        - destination_node (Node): The node where the arc terminates.</span>
+</span><span id="Arc.__init__-209"><a href="#Arc.__init__-209"><span class="linenos">209</span></a><span class="sd">        - kwargs: Additional keyword arguments passed to the SimulationEntity __init__ function.</span>
+</span><span id="Arc.__init__-210"><a href="#Arc.__init__-210"><span class="linenos">210</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Arc.__init__-211"><a href="#Arc.__init__-211"><span class="linenos">211</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="Arc.__init__-212"><a href="#Arc.__init__-212"><span class="linenos">212</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">origin_node</span> <span class="o">=</span> <span class="n">origin_node</span>
+</span><span id="Arc.__init__-213"><a href="#Arc.__init__-213"><span class="linenos">213</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">destination_node</span> <span class="o">=</span> <span class="n">destination_node</span>
 </span></pre></div>
 
 
@@ -1613,6 +1391,299 @@ This can be overridden in subclasses to implement specific behavior.</p>
             </div>
             <div><dt><a href="#SimulationObject">SimulationObject</a></dt>
                                 <dd id="Arc.id" class="variable"><a href="#SimulationObject.id">id</a></dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="Facility">
+                            <input id="Facility-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">Facility</span><wbr>(<span class="base"><a href="#Node">Node</a></span>):
+
+                <label class="view-source-button" for="Facility-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Facility"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Facility-216"><a href="#Facility-216"><span class="linenos">216</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Facility</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span><span id="Facility-217"><a href="#Facility-217"><span class="linenos">217</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility-218"><a href="#Facility-218"><span class="linenos">218</span></a><span class="sd">    A Facility class to represent nodes that can handle orders.</span>
+</span><span id="Facility-219"><a href="#Facility-219"><span class="linenos">219</span></a>
+</span><span id="Facility-220"><a href="#Facility-220"><span class="linenos">220</span></a><span class="sd">    This class is expected to be subclassed to implement specific facility behavior.</span>
+</span><span id="Facility-221"><a href="#Facility-221"><span class="linenos">221</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="Facility-222"><a href="#Facility-222"><span class="linenos">222</span></a>
+</span><span id="Facility-223"><a href="#Facility-223"><span class="linenos">223</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_arrived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility-224"><a href="#Facility-224"><span class="linenos">224</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility-225"><a href="#Facility-225"><span class="linenos">225</span></a><span class="sd">        A placeholder method to handle logic when an order arrives at this facility.</span>
+</span><span id="Facility-226"><a href="#Facility-226"><span class="linenos">226</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility-227"><a href="#Facility-227"><span class="linenos">227</span></a>
+</span><span id="Facility-228"><a href="#Facility-228"><span class="linenos">228</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility-229"><a href="#Facility-229"><span class="linenos">229</span></a>
+</span><span id="Facility-230"><a href="#Facility-230"><span class="linenos">230</span></a><span class="sd">        - order (Order): The order that has arrived.</span>
+</span><span id="Facility-231"><a href="#Facility-231"><span class="linenos">231</span></a>
+</span><span id="Facility-232"><a href="#Facility-232"><span class="linenos">232</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility-233"><a href="#Facility-233"><span class="linenos">233</span></a>
+</span><span id="Facility-234"><a href="#Facility-234"><span class="linenos">234</span></a><span class="sd">        - None</span>
+</span><span id="Facility-235"><a href="#Facility-235"><span class="linenos">235</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Facility-236"><a href="#Facility-236"><span class="linenos">236</span></a>
+</span><span id="Facility-237"><a href="#Facility-237"><span class="linenos">237</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_placed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility-238"><a href="#Facility-238"><span class="linenos">238</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility-239"><a href="#Facility-239"><span class="linenos">239</span></a><span class="sd">        A placeholder method to handle logic when an order is placed at this facility.</span>
+</span><span id="Facility-240"><a href="#Facility-240"><span class="linenos">240</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility-241"><a href="#Facility-241"><span class="linenos">241</span></a>
+</span><span id="Facility-242"><a href="#Facility-242"><span class="linenos">242</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility-243"><a href="#Facility-243"><span class="linenos">243</span></a>
+</span><span id="Facility-244"><a href="#Facility-244"><span class="linenos">244</span></a><span class="sd">        - order (Order): The order that has been placed.</span>
+</span><span id="Facility-245"><a href="#Facility-245"><span class="linenos">245</span></a>
+</span><span id="Facility-246"><a href="#Facility-246"><span class="linenos">246</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility-247"><a href="#Facility-247"><span class="linenos">247</span></a>
+</span><span id="Facility-248"><a href="#Facility-248"><span class="linenos">248</span></a><span class="sd">        - None</span>
+</span><span id="Facility-249"><a href="#Facility-249"><span class="linenos">249</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Facility-250"><a href="#Facility-250"><span class="linenos">250</span></a>
+</span><span id="Facility-251"><a href="#Facility-251"><span class="linenos">251</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_shipped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility-252"><a href="#Facility-252"><span class="linenos">252</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility-253"><a href="#Facility-253"><span class="linenos">253</span></a><span class="sd">        A placeholder method to handle logic when an order is shipped from this facility.</span>
+</span><span id="Facility-254"><a href="#Facility-254"><span class="linenos">254</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility-255"><a href="#Facility-255"><span class="linenos">255</span></a>
+</span><span id="Facility-256"><a href="#Facility-256"><span class="linenos">256</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility-257"><a href="#Facility-257"><span class="linenos">257</span></a>
+</span><span id="Facility-258"><a href="#Facility-258"><span class="linenos">258</span></a><span class="sd">        - order (Order): The order that has been shipped.</span>
+</span><span id="Facility-259"><a href="#Facility-259"><span class="linenos">259</span></a>
+</span><span id="Facility-260"><a href="#Facility-260"><span class="linenos">260</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility-261"><a href="#Facility-261"><span class="linenos">261</span></a>
+</span><span id="Facility-262"><a href="#Facility-262"><span class="linenos">262</span></a><span class="sd">        - None</span>
+</span><span id="Facility-263"><a href="#Facility-263"><span class="linenos">263</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Facility-264"><a href="#Facility-264"><span class="linenos">264</span></a>
+</span><span id="Facility-265"><a href="#Facility-265"><span class="linenos">265</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility-266"><a href="#Facility-266"><span class="linenos">266</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility-267"><a href="#Facility-267"><span class="linenos">267</span></a><span class="sd">        A placeholder method to handle logic when an order is completed at this facility.</span>
+</span><span id="Facility-268"><a href="#Facility-268"><span class="linenos">268</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility-269"><a href="#Facility-269"><span class="linenos">269</span></a>
+</span><span id="Facility-270"><a href="#Facility-270"><span class="linenos">270</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility-271"><a href="#Facility-271"><span class="linenos">271</span></a>
+</span><span id="Facility-272"><a href="#Facility-272"><span class="linenos">272</span></a><span class="sd">        - order (Order): The order that has been completed.</span>
+</span><span id="Facility-273"><a href="#Facility-273"><span class="linenos">273</span></a>
+</span><span id="Facility-274"><a href="#Facility-274"><span class="linenos">274</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility-275"><a href="#Facility-275"><span class="linenos">275</span></a>
+</span><span id="Facility-276"><a href="#Facility-276"><span class="linenos">276</span></a><span class="sd">        - None</span>
+</span><span id="Facility-277"><a href="#Facility-277"><span class="linenos">277</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>A Facility class to represent nodes that can handle orders.</p>
+
+<p>This class is expected to be subclassed to implement specific facility behavior.</p>
+</div>
+
+
+                            <div id="Facility.order_arrived" class="classattr">
+                                        <input id="Facility.order_arrived-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">order_arrived</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="Facility.order_arrived-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Facility.order_arrived"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Facility.order_arrived-223"><a href="#Facility.order_arrived-223"><span class="linenos">223</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_arrived</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility.order_arrived-224"><a href="#Facility.order_arrived-224"><span class="linenos">224</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility.order_arrived-225"><a href="#Facility.order_arrived-225"><span class="linenos">225</span></a><span class="sd">        A placeholder method to handle logic when an order arrives at this facility.</span>
+</span><span id="Facility.order_arrived-226"><a href="#Facility.order_arrived-226"><span class="linenos">226</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility.order_arrived-227"><a href="#Facility.order_arrived-227"><span class="linenos">227</span></a>
+</span><span id="Facility.order_arrived-228"><a href="#Facility.order_arrived-228"><span class="linenos">228</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility.order_arrived-229"><a href="#Facility.order_arrived-229"><span class="linenos">229</span></a>
+</span><span id="Facility.order_arrived-230"><a href="#Facility.order_arrived-230"><span class="linenos">230</span></a><span class="sd">        - order (Order): The order that has arrived.</span>
+</span><span id="Facility.order_arrived-231"><a href="#Facility.order_arrived-231"><span class="linenos">231</span></a>
+</span><span id="Facility.order_arrived-232"><a href="#Facility.order_arrived-232"><span class="linenos">232</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility.order_arrived-233"><a href="#Facility.order_arrived-233"><span class="linenos">233</span></a>
+</span><span id="Facility.order_arrived-234"><a href="#Facility.order_arrived-234"><span class="linenos">234</span></a><span class="sd">        - None</span>
+</span><span id="Facility.order_arrived-235"><a href="#Facility.order_arrived-235"><span class="linenos">235</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>A placeholder method to handle logic when an order arrives at this facility.
+This can be overridden in subclasses to implement specific behavior.</p>
+
+<p>Requires:</p>
+
+<ul>
+<li>order (Order): The order that has arrived.</li>
+</ul>
+
+<p>Returns:</p>
+
+<ul>
+<li>None</li>
+</ul>
+</div>
+
+
+                            </div>
+                            <div id="Facility.order_placed" class="classattr">
+                                        <input id="Facility.order_placed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">order_placed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="Facility.order_placed-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Facility.order_placed"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Facility.order_placed-237"><a href="#Facility.order_placed-237"><span class="linenos">237</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_placed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility.order_placed-238"><a href="#Facility.order_placed-238"><span class="linenos">238</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility.order_placed-239"><a href="#Facility.order_placed-239"><span class="linenos">239</span></a><span class="sd">        A placeholder method to handle logic when an order is placed at this facility.</span>
+</span><span id="Facility.order_placed-240"><a href="#Facility.order_placed-240"><span class="linenos">240</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility.order_placed-241"><a href="#Facility.order_placed-241"><span class="linenos">241</span></a>
+</span><span id="Facility.order_placed-242"><a href="#Facility.order_placed-242"><span class="linenos">242</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility.order_placed-243"><a href="#Facility.order_placed-243"><span class="linenos">243</span></a>
+</span><span id="Facility.order_placed-244"><a href="#Facility.order_placed-244"><span class="linenos">244</span></a><span class="sd">        - order (Order): The order that has been placed.</span>
+</span><span id="Facility.order_placed-245"><a href="#Facility.order_placed-245"><span class="linenos">245</span></a>
+</span><span id="Facility.order_placed-246"><a href="#Facility.order_placed-246"><span class="linenos">246</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility.order_placed-247"><a href="#Facility.order_placed-247"><span class="linenos">247</span></a>
+</span><span id="Facility.order_placed-248"><a href="#Facility.order_placed-248"><span class="linenos">248</span></a><span class="sd">        - None</span>
+</span><span id="Facility.order_placed-249"><a href="#Facility.order_placed-249"><span class="linenos">249</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>A placeholder method to handle logic when an order is placed at this facility.
+This can be overridden in subclasses to implement specific behavior.</p>
+
+<p>Requires:</p>
+
+<ul>
+<li>order (Order): The order that has been placed.</li>
+</ul>
+
+<p>Returns:</p>
+
+<ul>
+<li>None</li>
+</ul>
+</div>
+
+
+                            </div>
+                            <div id="Facility.order_shipped" class="classattr">
+                                        <input id="Facility.order_shipped-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">order_shipped</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="Facility.order_shipped-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Facility.order_shipped"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Facility.order_shipped-251"><a href="#Facility.order_shipped-251"><span class="linenos">251</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_shipped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility.order_shipped-252"><a href="#Facility.order_shipped-252"><span class="linenos">252</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility.order_shipped-253"><a href="#Facility.order_shipped-253"><span class="linenos">253</span></a><span class="sd">        A placeholder method to handle logic when an order is shipped from this facility.</span>
+</span><span id="Facility.order_shipped-254"><a href="#Facility.order_shipped-254"><span class="linenos">254</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility.order_shipped-255"><a href="#Facility.order_shipped-255"><span class="linenos">255</span></a>
+</span><span id="Facility.order_shipped-256"><a href="#Facility.order_shipped-256"><span class="linenos">256</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility.order_shipped-257"><a href="#Facility.order_shipped-257"><span class="linenos">257</span></a>
+</span><span id="Facility.order_shipped-258"><a href="#Facility.order_shipped-258"><span class="linenos">258</span></a><span class="sd">        - order (Order): The order that has been shipped.</span>
+</span><span id="Facility.order_shipped-259"><a href="#Facility.order_shipped-259"><span class="linenos">259</span></a>
+</span><span id="Facility.order_shipped-260"><a href="#Facility.order_shipped-260"><span class="linenos">260</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility.order_shipped-261"><a href="#Facility.order_shipped-261"><span class="linenos">261</span></a>
+</span><span id="Facility.order_shipped-262"><a href="#Facility.order_shipped-262"><span class="linenos">262</span></a><span class="sd">        - None</span>
+</span><span id="Facility.order_shipped-263"><a href="#Facility.order_shipped-263"><span class="linenos">263</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>A placeholder method to handle logic when an order is shipped from this facility.
+This can be overridden in subclasses to implement specific behavior.</p>
+
+<p>Requires:</p>
+
+<ul>
+<li>order (Order): The order that has been shipped.</li>
+</ul>
+
+<p>Returns:</p>
+
+<ul>
+<li>None</li>
+</ul>
+</div>
+
+
+                            </div>
+                            <div id="Facility.order_completed" class="classattr">
+                                        <input id="Facility.order_completed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">order_completed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">order</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="Facility.order_completed-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Facility.order_completed"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Facility.order_completed-265"><a href="#Facility.order_completed-265"><span class="linenos">265</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+</span><span id="Facility.order_completed-266"><a href="#Facility.order_completed-266"><span class="linenos">266</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Facility.order_completed-267"><a href="#Facility.order_completed-267"><span class="linenos">267</span></a><span class="sd">        A placeholder method to handle logic when an order is completed at this facility.</span>
+</span><span id="Facility.order_completed-268"><a href="#Facility.order_completed-268"><span class="linenos">268</span></a><span class="sd">        This can be overridden in subclasses to implement specific behavior.</span>
+</span><span id="Facility.order_completed-269"><a href="#Facility.order_completed-269"><span class="linenos">269</span></a>
+</span><span id="Facility.order_completed-270"><a href="#Facility.order_completed-270"><span class="linenos">270</span></a><span class="sd">        Requires:</span>
+</span><span id="Facility.order_completed-271"><a href="#Facility.order_completed-271"><span class="linenos">271</span></a>
+</span><span id="Facility.order_completed-272"><a href="#Facility.order_completed-272"><span class="linenos">272</span></a><span class="sd">        - order (Order): The order that has been completed.</span>
+</span><span id="Facility.order_completed-273"><a href="#Facility.order_completed-273"><span class="linenos">273</span></a>
+</span><span id="Facility.order_completed-274"><a href="#Facility.order_completed-274"><span class="linenos">274</span></a><span class="sd">        Returns:</span>
+</span><span id="Facility.order_completed-275"><a href="#Facility.order_completed-275"><span class="linenos">275</span></a>
+</span><span id="Facility.order_completed-276"><a href="#Facility.order_completed-276"><span class="linenos">276</span></a><span class="sd">        - None</span>
+</span><span id="Facility.order_completed-277"><a href="#Facility.order_completed-277"><span class="linenos">277</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>A placeholder method to handle logic when an order is completed at this facility.
+This can be overridden in subclasses to implement specific behavior.</p>
+
+<p>Requires:</p>
+
+<ul>
+<li>order (Order): The order that has been completed.</li>
+</ul>
+
+<p>Returns:</p>
+
+<ul>
+<li>None</li>
+</ul>
+</div>
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt><a href="#Node">Node</a></dt>
+                                <dd id="Facility.__init__" class="function"><a href="#Node.__init__">Node</a></dd>
+                <dd id="Facility.inbound_graph_id" class="variable"><a href="#Node.inbound_graph_id">inbound_graph_id</a></dd>
+                <dd id="Facility.outbound_graph_id" class="variable"><a href="#Node.outbound_graph_id">outbound_graph_id</a></dd>
+
+            </div>
+            <div><dt><a href="#SimulationEntity">SimulationEntity</a></dt>
+                                <dd id="Facility.entity_type" class="variable"><a href="#SimulationEntity.entity_type">entity_type</a></dd>
+                <dd id="Facility.cashflow_key" class="variable"><a href="#SimulationEntity.cashflow_key">cashflow_key</a></dd>
+                <dd id="Facility.metadata" class="variable"><a href="#SimulationEntity.metadata">metadata</a></dd>
+                <dd id="Facility.processing_time_min" class="variable"><a href="#SimulationEntity.processing_time_min">processing_time_min</a></dd>
+                <dd id="Facility.processing_time_avg" class="variable"><a href="#SimulationEntity.processing_time_avg">processing_time_avg</a></dd>
+                <dd id="Facility.processing_time_sd" class="variable"><a href="#SimulationEntity.processing_time_sd">processing_time_sd</a></dd>
+                <dd id="Facility.processing_cashflow_per_unit" class="variable"><a href="#SimulationEntity.processing_cashflow_per_unit">processing_cashflow_per_unit</a></dd>
+                <dd id="Facility.get_metadata" class="function"><a href="#SimulationEntity.get_metadata">get_metadata</a></dd>
+                <dd id="Facility.get_processing_time" class="function"><a href="#SimulationEntity.get_processing_time">get_processing_time</a></dd>
+                <dd id="Facility.change_processing_parameters" class="function"><a href="#SimulationEntity.change_processing_parameters">change_processing_parameters</a></dd>
+                <dd id="Facility.reset_processing_parameters" class="function"><a href="#SimulationEntity.reset_processing_parameters">reset_processing_parameters</a></dd>
+                <dd id="Facility.get_cashflow" class="function"><a href="#SimulationEntity.get_cashflow">get_cashflow</a></dd>
+
+            </div>
+            <div><dt><a href="#SimulationObject">SimulationObject</a></dt>
+                                <dd id="Facility.id" class="variable"><a href="#SimulationObject.id">id</a></dd>
 
             </div>
                                 </dl>
