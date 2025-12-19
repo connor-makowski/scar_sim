@@ -189,7 +189,10 @@ class Order(SimulationObject):
                 self.__current_object__.outbound_graph_id
             ][next_graph_id]
             # Determine the next node given this arc (allowing for symmetic arcs)
-            if self.__current_object__.origin_node.inbound_graph_id == next_graph_id:
+            if (
+                self.__current_object__.origin_node.inbound_graph_id
+                == next_graph_id
+            ):
                 self.__next_node__ = self.__current_object__.origin_node
             else:
                 self.__next_node__ = self.__current_object__.destination_node

@@ -58,7 +58,9 @@ class Graph:
                 obj.outbound_graph_id: max(float(obj.processing_time_avg), 0)
             }
             self.cashflow_graph[obj.inbound_graph_id] = {
-                obj.outbound_graph_id: max(-float(obj.processing_cashflow_per_unit), 0)
+                obj.outbound_graph_id: max(
+                    -float(obj.processing_cashflow_per_unit), 0
+                )
             }
 
     def add_object(self, obj: Node | Arc) -> Node | Arc:

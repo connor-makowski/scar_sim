@@ -151,4 +151,3 @@ Make sure Docker is installed and running.
     - `./utils/test.sh`
 - Prettify Code
     - `./utils/prettify.sh`"""
-
