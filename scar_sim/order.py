@@ -188,6 +188,11 @@ class Order(SimulationObject):
             self.__current_object__ = self.__simulation__.graph.arc_obj_graph[
                 self.__current_object__.outbound_graph_id
             ][next_graph_id]
+            # Determine the next node given this arc (allowing for symmetic arcs)
+            if self.__current_object__.origin_node.inbound_graph_id == next_graph_id:
+                self.__next_node__ = self.__current_object__.origin_node
+            else:
+                self.__next_node__ = self.__current_object__.destination_node
             next_status = "arrived"
         elif status == "arrived":
             if not isinstance(self.__current_object__, Arc):
@@ -196,8 +201,8 @@ class Order(SimulationObject):
             self.set_current_cashflow(
                 self.__current_object__.get_cashflow(units=self.units)
             )
-            # Set the current object to the destination Node of the Arc
-            self.__current_object__ = self.__current_object__.destination_node
+            # Set the current object to the next Node (supports symmetric arcs)
+            self.__current_object__ = self.__next_node__
             if not isinstance(self.__current_object__, Node):
                 raise ValueError("Next object must be a Node when arriving")
             # Consider rerouting the order

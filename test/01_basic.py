@@ -122,9 +122,25 @@ order = simulation.add_object(
     )
 )
 
+order_2 = simulation.add_object(
+    Order(
+        origin_node=customer_03,
+        destination_node=supplier_00,
+        units=2,
+        planned_path=simulation.graph.get_optimal_path(
+            customer_03, supplier_00, "cashflow"
+        ),
+    )
+)
+
 simulation.add_event(
     time_delta=1.0,
     func=order.start,
+)
+
+simulation.add_event(
+    time_delta=1.5,
+    func=order_2.start,
 )
 
 simulation.add_event(
@@ -144,3 +160,4 @@ simulation.run(max_time=10.0)
 from pprint import pprint as print
 
 print(simulation.orders[0].history)
+# print(simulation.orders[1].history)

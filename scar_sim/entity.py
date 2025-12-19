@@ -251,7 +251,7 @@ class Node(SimulationEntity):
 
 
 class Arc(SimulationEntity):
-    def __init__(self, origin_node: Node, destination_node: Node, **kwargs):
+    def __init__(self, origin_node: Node, destination_node: Node, is_symmetric: bool = True, **kwargs):
         """
         Initializes an Arc entity connecting two nodes with processing parameters and metadata.
 
@@ -262,7 +262,13 @@ class Arc(SimulationEntity):
         - origin_node (Node): The node where the arc originates.
         - destination_node (Node): The node where the arc terminates.
         - kwargs: Additional keyword arguments passed to the SimulationEntity __init__ function.
+        
+        Optional Arguments:
+
+        - is_symmetric (bool): Indicates whether the arc is symmetric, meaning the processing parameters apply equally in both directions. 
+            - Default: True
         """
         super().__init__(**kwargs)
+        self.is_symmetric = is_symmetric
         self.origin_node = origin_node
         self.destination_node = destination_node

@@ -21,6 +21,10 @@ class Graph:
 
         This should be called when an Arc or Node's processing parameters are changed to ensure the graph representations remain accurate.
 
+        Any cashflow that is positive will be treated as zero since cashflows in the graph are only used to represent costs (negative cashflows).
+
+        If an arc is symmetric, the graph will be updated in both directions.
+
         Required Arguments:
 
         - obj (Arc | Node): The Arc or Node object to update the graphs with.
@@ -32,28 +36,29 @@ class Graph:
         if isinstance(obj, Arc):
             self.time_graph[obj.origin_node.outbound_graph_id][
                 obj.destination_node.inbound_graph_id
-            ] = float(obj.processing_time_avg)
-            self.time_graph[obj.destination_node.inbound_graph_id][
-                obj.origin_node.outbound_graph_id
-            ] = float(obj.processing_time_avg)
+            ] = max(float(obj.processing_time_avg), 0)
             self.cashflow_graph[obj.origin_node.outbound_graph_id][
                 obj.destination_node.inbound_graph_id
-            ] = -float(obj.processing_cashflow_per_unit)
-            self.cashflow_graph[obj.destination_node.inbound_graph_id][
-                obj.origin_node.outbound_graph_id
-            ] = -float(obj.processing_cashflow_per_unit)
+            ] = max(-float(obj.processing_cashflow_per_unit), 0)
             self.arc_obj_graph[obj.origin_node.outbound_graph_id][
                 obj.destination_node.inbound_graph_id
             ] = obj
-            self.arc_obj_graph[obj.destination_node.inbound_graph_id][
-                obj.origin_node.outbound_graph_id
-            ] = obj
+            if obj.is_symmetric:
+                self.time_graph[obj.destination_node.outbound_graph_id][
+                    obj.origin_node.inbound_graph_id
+                ] = max(float(obj.processing_time_avg), 0)
+                self.cashflow_graph[obj.destination_node.outbound_graph_id][
+                    obj.origin_node.inbound_graph_id
+                ] = max(-float(obj.processing_cashflow_per_unit), 0)
+                self.arc_obj_graph[obj.destination_node.outbound_graph_id][
+                    obj.origin_node.inbound_graph_id
+                ] = obj
         elif isinstance(obj, Node):
             self.time_graph[obj.inbound_graph_id] = {
-                obj.outbound_graph_id: float(obj.processing_time_avg)
+                obj.outbound_graph_id: max(float(obj.processing_time_avg), 0)
             }
             self.cashflow_graph[obj.inbound_graph_id] = {
-                obj.outbound_graph_id: float(obj.processing_cashflow_per_unit)
+                obj.outbound_graph_id: max(-float(obj.processing_cashflow_per_unit), 0)
             }
 
     def add_object(self, obj: Node | Arc) -> Node | Arc:
