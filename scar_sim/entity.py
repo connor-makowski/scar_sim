@@ -1,8 +1,3 @@
-import random
-
-random.seed(42)
-
-
 class SimulationObject:
     def __init__(self):
         """
@@ -96,9 +91,10 @@ class SimulationEntity(SimulationObject):
 
         - float: A processing time value, which is at least the minimum processing time and follows a normal distribution defined by the average and standard deviation.
         """
-        return max(
-            self.processing_time_min,
-            random.gauss(self.processing_time_avg, self.processing_time_sd),
+        return self.__simulation__.normal_generator(
+            mean=self.processing_time_avg,
+            sigma=self.processing_time_sd,
+            min=self.processing_time_min,
         )
 
     def change_processing_parameters(

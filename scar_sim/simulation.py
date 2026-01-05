@@ -3,6 +3,7 @@ from scar_sim.entity import Node, Arc, SimulationObject
 from scar_sim.order import Order
 from scar_sim.graph import Graph
 import dill
+from scar_sim.utils import NormalGenerator
 
 
 class Simulation:
@@ -17,6 +18,7 @@ class Simulation:
         # Stateful queue and graphs
         self.__queue__ = Queue()
         self.graph = Graph()
+        self.normal_generator = NormalGenerator(42)
 
     def current_time(self) -> float:
         """
