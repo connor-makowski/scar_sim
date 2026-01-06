@@ -34,8 +34,8 @@ class Simulation:
         self,
         time_delta: float,
         func,
-        args: tuple = tuple(),
-        kwargs: dict = dict(),
+        args: tuple = None,
+        kwargs: dict = None,
     ) -> None:
         """
         Schedules a new event in the simulation's event queue.
@@ -56,6 +56,8 @@ class Simulation:
 
         - None
         """
+        args = args if args is not None else tuple()
+        kwargs = kwargs if kwargs is not None else dict()
         self.__queue__.add(
             time_delta=time_delta, func=func, args=args, kwargs=kwargs
         )

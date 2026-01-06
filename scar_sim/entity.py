@@ -18,7 +18,7 @@ class SimulationEntity(SimulationObject):
         processing_avg_time: float = 0.0,
         processing_sd_time: float = 0.0,
         processing_cashflow_per_unit: float = 0.0,
-        metadata: dict = dict(),
+        metadata: dict = None,
     ):
         """
         Initializes a SimulationEntity with processing parameters and metadata.
@@ -35,6 +35,7 @@ class SimulationEntity(SimulationObject):
         - metadata (dict): A dictionary of metadata associated with the entity.
             - This is injected into orders and can be used for tracking and analysis.
         """
+        metadata = metadata if metadata is not None else dict()
         # Basic info
         super().__init__()
         self.entity_type = self.__class__.__name__

@@ -25,8 +25,8 @@ class Queue:
         self,
         time_delta: float,
         func,
-        args: tuple = tuple(),
-        kwargs: dict = dict(),
+        args: tuple = None,
+        kwargs: dict = None,
     ) -> None:
         """
         Schedules a new event in the queue to be executed after a specified time delta.
@@ -43,6 +43,8 @@ class Queue:
         - kwargs (dict): Keyword arguments to pass to the function when called.
             - Default: dict()
         """
+        args = args if args is not None else tuple()
+        kwargs = kwargs if kwargs is not None else dict()
         if time_delta < 0:
             raise ValueError("Cannot schedule events in the past")
         self.__event_id__ += 1
