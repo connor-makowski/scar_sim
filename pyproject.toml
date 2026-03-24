@@ -12,7 +12,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scar_sim"
-version = "0.0.5"
+version = "0.0.6"
 description = "A pure python Supply Chain Adaptation and Resilience simulation tool"
 authors = [
     {name="Connor Makowski", email="conmak@mit.edu"}
@@ -24,7 +24,7 @@ classifiers = [
     'License :: OSI Approved :: MIT License',
     "Operating System :: OS Independent",
 ]
-dependencies = ["scgraph==2.15.0", "dill==0.4.0"]
+dependencies = ["scgraph>=3.1.1,<4.0.0", "dill==0.4.0"]
 
 [project.urls]
 "Homepage" = "https://github.com/connor-makowski/scar_sim"

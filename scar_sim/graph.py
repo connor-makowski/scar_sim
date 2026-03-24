@@ -130,11 +130,10 @@ class Graph:
 
         - list[int]: A list of graph IDs representing the optimal path.
         """
-        graph_obj = (
+        graph_obj = SCGraph(
             self.cashflow_graph if graph == "cashflow" else self.time_graph
         )
-        return SCGraph.dijkstra_makowski(
-            graph_obj,
+        return graph_obj.dijkstra(
             origin_node.inbound_graph_id,
             destination_node.inbound_graph_id,
         )["path"]

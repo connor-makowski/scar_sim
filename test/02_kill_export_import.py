@@ -2,7 +2,6 @@ from scar_sim.entity import Node, Arc
 from scar_sim.order import Order
 from scar_sim.simulation import Simulation
 
-
 simulation = Simulation()
 
 # Create nodes
